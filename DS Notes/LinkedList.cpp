@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 struct node{
     int data;
     node* next;
@@ -99,7 +100,50 @@ void Print(){
 //         l = l->next;
 //     }
 // }
-
+//RECURSION
+struct NODE{
+    int data;
+    NODE* next;
+};
+NODE* Insert(NODE* A , int data){
+    NODE *temp = new NODE();
+    temp->data = data;
+    temp->next = NULL;
+    if (A==NULL)
+    {
+        A = temp;
+    }
+    else{
+        NODE* temp1 = A;
+        while (temp1->next!=NULL)
+        {
+            temp1=temp1->next;
+        }
+        temp1->next=temp;
+        
+    }
+    return A;
+}
+void PrintR( NODE* p){
+    if(p==NULL)return;
+    //IF we write recursive command first list will be printed in reverse order
+    PrintR(p->next); //recursive call
+    cout<<p->data;
+    // PrintR(p->next); //list will be printed in forward order
+}
+void ReverseR(node* p){
+    if (p->next==NULL)
+    {
+        head = p;
+        return;
+    }
+    ReverseR(p->next);
+    // node* q = p->next;
+    // q->next = p;
+    //Or
+    p->next->next=p;
+    p->next = NULL;
+}
 int main()
 { 
  head = NULL;
@@ -145,6 +189,25 @@ int main()
 // cout<<endl;
 // head = Reverse();
 // Print();
+
+//Recursion for printing list in forward and reverse order
+// NODE* A = NULL;
+// A = Insert(A , 2);
+// A = Insert(A , 4);
+// A = Insert(A , 6);
+// A = Insert(A , 5);
+// PrintR(A);
+
+//Reversing a list using recursion
+Insertfirst(2);
+Insertfirst(4);
+Insertfirst(6);
+Insertfirst(8);
+Print(); //8642
+cout<<endl;
+ReverseR(head);
+Print(); //2468
+
 
  return 0;
 }
