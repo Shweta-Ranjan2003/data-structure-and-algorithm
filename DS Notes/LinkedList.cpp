@@ -88,6 +88,10 @@ node* Reverse(){
 }
 void Print(){
     node* temp = head;
+    //IMPORTANT
+//difference in Node* temp = new Node() and Node* temp = head is
+//when we write new Node() then temp points to a dynamically created new memory of two block one for data and one for node and itself contains address of that block
+//when we write = head then no new dynamic memory is created just a pointer of node type containing address of head is created and can be used to free memory of head which may be a dynamically created block of memory.
     while(temp!= NULL){
         cout<<temp->data<<" ";
         temp = temp->next;
