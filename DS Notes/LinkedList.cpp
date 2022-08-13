@@ -53,7 +53,7 @@ void Insertend(int data){
   
 }
 void Delete(int n){
- node * temp1 = new node();
+ node * temp1;
  temp1 = head;
  if (n==1)
  {
@@ -208,6 +208,8 @@ Insertfirst(4);
 Insertfirst(6);
 Insertfirst(8);
 Print(); //8642
+Delete(2);
+Print();
 cout<<endl;
 ReverseR(head);
 Print(); //2468
