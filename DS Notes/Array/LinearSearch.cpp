@@ -6,12 +6,13 @@ void LinearSearch(int arr[] ,int size , int item){
     if (arr[i]==item)
     {
         cout<<"Item is present at index: "<<i<<endl;
+        return;
     }
     else
     continue;
     
  }
- 
+ cout<<"The element is not present in array"<<endl;
 }
 int main()
 { 

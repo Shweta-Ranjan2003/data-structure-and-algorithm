@@ -37,34 +37,38 @@ int Insertionatnth(int arr[] , int size , int key , int pos){
 //     return (size+1);
 //     }
 // }
-
 int main()
 { 
-    int size;
-    cout<<"Enter the size of the array: ";
-    cin>>size;
-    int arr[size];
-    for (int i = 0; i < (size-1); i++)
+    int arr[30];
+    cout<<"Enter the size of array: ";
+    int s;
+    cin>>s;
+    if (s>=30)
     {
-        cin>>arr[i];
+        cout<<"Out of range"<<endl;
     }
-    int pos , key;
-     cout<<"enter key you want to add: ";
-     cin>>key;
-     cout<<" enter at which index you want to insert key: ";
-     cin>>pos;
-     
-    // int capacity = sizeof(arr) / sizeof(arr[0]);
-    cout<< "\nBefore Insertion: ";
-    for (int i = 0; i < size-1; i++)
-        cout << arr[i] << " ";
- 
-    // Inserting key
-    size = Insertionatnth(arr, size, key, pos);
- 
-    cout << "\nAfter Insertion: ";
-    for (int i = 0; i < (size-1); i++)
-        cout << arr[i]<< " ";
- 
- return 0;
+    else{
+        for (int i = 0; i < s; i++)
+        {
+            cin>>arr[i];
+        }
+        
+    }
+    for (int i = 0; i < s; i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    cout<<"Enter the value you want to insert: ";
+    int key , index;
+    cin>>key;
+    cout<<"Enter the index you want to insert the key: ";
+    cin>>index;
+    int size = Insertionatnth(arr , s , key , index);
+    for (int i = 0; i < size; i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    return 0;
 }

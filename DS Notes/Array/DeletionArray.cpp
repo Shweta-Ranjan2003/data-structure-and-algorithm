@@ -12,10 +12,25 @@ int findPos(int arr[],int size , int key){
         count++;
         
     }
-    return count;
+    return -1;
 }
-int Deletion(int arr[],int size , int key){
+int Deletionsearch(int arr[],int size , int key){
     int pos = findPos(arr , size , key);
+    if (pos==-1)
+    {
+        return -1;
+    }
+    else{
+    while (pos<size)
+    {
+      arr[pos] = arr[pos+1];
+      pos++;
+    }
+    return (size-1);
+    }
+    
+}
+int Deletion(int arr[],int size , int pos){
     while (pos<size)
     {
       arr[pos] = arr[pos+1];
@@ -33,20 +48,37 @@ int main()
     {
         cin>>arr[i];
     }
+    for (int i = 0; i < size; i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
     int pos , key;
      cout<<"enter key you want to delete: ";
      cin>>key;
      
-    cout<< "\nBefore Deletion: ";
-    for (int i = 0; i < size; i++)
-        cout << arr[i] << " ";
- 
-    // Inserting key
-    size = Deletion(arr, size, key);
- 
+    int sizee = Deletionsearch(arr, size, key);
+    if (sizee==-1)
+    {
+        cout<<"Element not found in array"<<endl;
+    }
+    else{
+    
     cout << "\nAfter Deletion: ";
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < sizee; i++){
         cout << arr[i]<< " ";
- 
+    }
+    }
+    cout<<endl;
+    cout<<"Enter the index you want to remove element: ";
+    cin>>pos;
+    int sz;
+     sz = Deletion(arr , size , pos);
+    for (int i = 0; i < sz; i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    
     return 0;
 }
