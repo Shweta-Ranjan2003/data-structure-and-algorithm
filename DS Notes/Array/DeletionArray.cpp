@@ -64,7 +64,7 @@ int main()
     }
     else{
     
-    cout << "\nAfter Deletion: ";
+    cout << "After Deletion: ";
     for (int i = 0; i < sizee; i++){
         cout << arr[i]<< " ";
     }
@@ -73,7 +73,7 @@ int main()
     cout<<"Enter the index you want to remove element: ";
     cin>>pos;
     int sz;
-     sz = Deletion(arr , size , pos);
+     sz = Deletion(arr , sizee , pos);
     for (int i = 0; i < sz; i++)
     {
         cout<<arr[i]<<" ";
