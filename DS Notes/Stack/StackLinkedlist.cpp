@@ -5,34 +5,30 @@ using namespace std;
 struct Node
 {
     int data;
-    Node* link;
+    Node* next;
 };
 Node* top = NULL;
 void Push(int x){
     Node* temp = new Node();
     temp->data = x;
-    temp->link = top;
+    temp->next = top;
     top = temp;
 }
 void Pop(){
-    Node* temp = new Node();
+    Node* temp=top;
     if (top==NULL)
     {
         return;
     }
-    
-    temp = top;
-    top = top->link;
+    top = temp->next;
     delete(temp);
 }
 void Top(){
-    Node* temp ;
+    Node* temp =top;
     if (top==NULL)
     {
         return;
     }
-    
-    temp=top;
     cout<<temp->data<<endl;
 }
 int IsEmpty(){
@@ -47,7 +43,7 @@ void Print(){
     Node* temp = top;
     while(temp!= NULL){
         cout<<temp->data<<" ";
-        temp = temp->link;
+        temp = temp->next;
     }
     cout<<endl;
 }
@@ -77,7 +73,7 @@ void Print(){
     
 // }
 
- //Reverse a Linked list
+ //Reverse a linked list
 void REVERSE(){
     if (top==NULL)
     {
@@ -88,19 +84,19 @@ void REVERSE(){
     while (temp!=NULL)
     {
         S.push(temp);
-        temp=temp->link;
+        temp=temp->next;
     }
     temp=S.top();
     top=temp;
     S.pop();
     while (!S.empty())
     {
-        temp->link=S.top();
+        temp->next=S.top();
         S.pop();
-        temp=temp->link;
+        temp=temp->next;
     }
     
-    temp->link=NULL;
+    temp->next=NULL;
 }
 
 int main()
@@ -129,7 +125,7 @@ int main()
 //  Reverse(C , strlen(C));
 //  cout<<"Output= "<<C<<endl;
 
- //Reverse a Linked list
+ //Reverse a linked list
  Push(2);
  Push(5);
  Push(10);
