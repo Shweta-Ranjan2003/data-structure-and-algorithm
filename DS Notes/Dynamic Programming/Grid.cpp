@@ -52,7 +52,7 @@ f(day , last_task ,dp){
     int maxi=0;
     for(int i=0;i<=2;i++){
         if(i!=last_task){
-        maxi=max(maxi,points[0,i]);
+        maxi=max(maxi,points[0][i]);
         }
     }
     return maxi;
@@ -337,6 +337,73 @@ for(int i=0;i<n;i++){
     prev=temp;
 }
 return prev[m-1];
+*/
+
+
+/*
+Triangle->
+reach from 0,0 index to last row -> right triangle
+1
+2  3
+3  6  7
+8  9  6  10
+
+f(i,j){
+    if(i==N-1) return mat[i][j]
+    down=mat[i][j]+f(i+1,j);
+    diagonal=mat[i][j]+f(i+1,j+1);
+
+    return min(down,diagonal);
+}
+
+//Memoization
+f(i,j,dp){
+if(dp[i][j]!=-1) return dp[i][j];
+if(i==n-1) return triangle[i][j];
+int down=triangle[i][j]+f(i+1,j);
+int diagonal = triangle[i][j]+f(i+1,j+1);
+
+return dp[i][j]=min(down,diagonal);
+}
+
+//Tabulation
+ vector<vector<int> > dp(n,vector<int>(n,0));
+    
+    for(int j=0;j<n;j++){
+        dp[n-1][j] = triangle[n-1][j];
+    }
+    
+    for(int i=n-2; i>=0; i--){
+        for(int j=i; j>=0; j--){
+            
+            int down = triangle[i][j]+dp[i+1][j];
+            int diagonal = triangle[i][j]+dp[i+1][j+1];
+            
+            dp[i][j] = min(down, diagonal);
+        }
+    }
+    
+    return dp[0][0];
+
+//Space optimization
+vector<int> front(n,0), cur(n,0);
+    
+    for(int j=0;j<n;j++){
+        front[j] = triangle[n-1][j];
+    }
+    
+    for(int i=n-2; i>=0; i--){
+        for(int j=i; j>=0; j--){
+            
+            int down = triangle[i][j]+front[j];
+            int diagonal = triangle[i][j]+front[j+1];
+            
+            cur[j] = min(down, diagonal);
+        }
+        front=cur;
+    }
+    
+    return front[0];
 */
 int main()
 { 
