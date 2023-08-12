@@ -219,7 +219,7 @@ for(int i=0;i<m;i++){
 /*
 Unique path 2 -> you cannot go via dead cell
 f(i,j){
-    if(i>=0 and j>=0 and mat[i][j]==-1) return 0;
+    if(i>=0 and j>=0 and mat[i][j]==1) return 0;
     if(i==0 and j==0) return 1;
     if(i<0 or j<0) return 0;
     int up=f(i-1,j);
@@ -228,8 +228,9 @@ f(i,j){
     return up+left;
 }
 //Memoization
+ vector<vector<int> > dp(m,vector<int>(n,-1));
 f(i,j,dp){
-    if(i>=0 and j>=0 and mat[i][j]==-1) return 0;
+    if(i>=0 and j>=0 and mat[i][j]==1) return 0;
     if(i==0 and j==0) return 1;
     if(i<0 or j<0) return 0;
     if(dp[i][j]!=-1) return dp[i][j];
@@ -239,10 +240,10 @@ f(i,j,dp){
     return dp[i][j]=up+left;
 }
 //Tabulation
-int dp[n][m];
+vector<vector<int> > dp(n,vector<int>(m,-1));
 for(int i=0;i<n;i++){
     for(int j=0;j<m;j++){
-   if(mat[i][j]==-1)dp[i][j]=0;
+   if(i>0 and j>0 and mat[i][j]==-1)dp[i][j]=0;
    else if(i==0 and j==0) dp[i][j]=1;
    else{
     int up=0;
@@ -293,6 +294,7 @@ f(i,j){
     return min(up,left);
 }
 
+vector<vector<int> > dp(m,vector<int>(n,-1));
 f(i,j,dp){
     if(i==0 and j==0) return a[0][0];
     if(i<0 or j<0) return 1e9;
@@ -304,18 +306,27 @@ f(i,j,dp){
 }
 
 //Tabulation
-dp[n][m];
-for(int i=0;i<n;i++){
-    for(int j=0;j<m;j++){
-        if(i==0 and j==0) dp[i][j]=a[0][0];
-        else{
-            if(i>0)int up=a[i][j]+dp[i-1][j];
-           if(j>0) int left=a[i][j]+dp[i][j-1];
-            dp[i][j]=min(up,left);
+vector<vector<int> > dp(m,vector<int>(n,0));
+    for(int i=0; i<m ; i++){
+        for(int j=0; j<n; j++){
+            if(i==0 && j==0) dp[i][j] = matrix[i][j];
+            else{
+                
+                int up = matrix[i][j];
+                if(i>0) up += dp[i-1][j];
+                else up += 1e9;
+                
+                int left = matrix[i][j];
+                if(j>0) left+=dp[i][j-1];
+                else left += 1e9;
+                
+                dp[i][j] = min(up,left);
+            }
         }
     }
-}
-return dp[n-1][m-1];
+    
+    return dp[m-1][n-1];
+    
 
 //Space optimization
 vector<int> prev(m,0);
@@ -357,11 +368,12 @@ f(i,j){
 }
 
 //Memoization
+vector<vector<int> > dp(n,vector<int>(n,-1));
 f(i,j,dp){
 if(dp[i][j]!=-1) return dp[i][j];
 if(i==n-1) return triangle[i][j];
-int down=triangle[i][j]+f(i+1,j);
-int diagonal = triangle[i][j]+f(i+1,j+1);
+int down=triangle[i][j]+f(i+1,j,dp);
+int diagonal = triangle[i][j]+f(i+1,j+1,dp);
 
 return dp[i][j]=min(down,diagonal);
 }
