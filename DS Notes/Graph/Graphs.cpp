@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <queue>
 using namespace std;
 /*
 Graph:- A graph G is an ordered pair of a set V of vertices and a set E of edges.
@@ -50,9 +52,166 @@ Node* A[8]; for storing the head address of the list
 Space Complexity = O(|E|)+(|V|)
 |E|<<|V|*|V|  (most graph are sparse)
 We can still do better with a binary tree....
+
+Degrees of Graph -> Total degrees= 2*E
+Indegree - no of incoming edges
+Outdegree - no of outgoing edges
+
+Lets say if there is a 10 node graph but they are not connected ,they are in 4 different component
+1-2  5-6 7-8  10
+4-3        9
+then for traversing the graph we can make a visited array of size 10
+and start from 1 and mark the visited nodes
+1. 1-T , 2-T , 3-T , 4-T
+Then for traversing 5 you have to travel that component
+2. 5-T 6-T
+3. 7-T 8-T 9-T
+4. 10-T
+for(int i=1;i<=10;i++){
+    if(!vis[i]){
+        traverse(i);
+        array[i]=True;
+    }
+}
 */
-int main()
-{ 
- 
- return 0;
+
+//Traversal
+/*
+Breadth first traversal - Level wise (0-n)
+        1
+    2       6
+ 3     4  7    8
+         5
+Starting node 1 - 1 2 6 3 4 7 8 5
+Starting node 6 - 6(0) 1 7 8(1) 2 5(2) 3 4(3) level
+
+        1
+    2       6
+ 3     4  7    9
+      5----8
+Adjacency list
+1 -> 2,6
+2-> 1,3,4
+3-> 2
+4-> 2,5
+5-> 4,8
+6-> 1,7,9
+7-> 6,8
+8-> 5,7
+9-> 6
+
+use queue and visited array of  size 10 and mark visited node
+queue - 1 2 5 3 4 7 9 5 8 = bfs 
+*/
+vector<int> bfs(int V , vector<int> adj[]){
+   vector < int > bfs;
+      vector < int > vis(V, 0);
+      queue < int > q;
+      q.push(0);
+      vis[0] = 1;
+      while (!q.empty()) {
+        int node = q.front();
+        q.pop();
+        bfs.push_back(node);
+
+        for (auto it: adj[node]) {
+          if (!vis[it]) {
+            q.push(it);
+            vis[it] = 1;
+          }
+        }
+      }
+
+      return bfs;
+}
+
+/*
+DFS - depth first search
+       1
+    2     3---4
+  5   6   7---8
+
+  dfs - 1 2 5 6 3 7 8 4
+ starting node = 3 -> 3 4 8 7 1 2 5 6
+ use recursion to traverse and come back
+ adjacency list 
+ 1-> 2,3
+ 2-> 1,5,6
+ 3-> 1,4,7
+ 4-> 3,8
+ 5-> 2
+ 6-> 2
+ 7-> 3,8
+ 8-> 4,7
+
+ create a visited node of size 0-8
+ dfs(node){
+    vis[node]=1;
+    list.add(node)
+    for(auto it:adj[node]){
+        if(!vis[it])
+        dfs(it)
+    }
+ }
+ 1,2,5,6,3,7,8,4
+*/
+
+void dfs(int node, vector<int> adj[], int vis[], vector<int> &ls) {
+        vis[node] = 1; 
+        ls.push_back(node); 
+        // traverse all its neighbours
+        for(auto it : adj[node]) {
+            // if the neighbour is not visited
+            if(!vis[it]) {
+                dfs(it, adj, vis, ls); 
+            }
+        }
+    }
+     vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        int vis[V] = {0}; 
+        int start = 0;
+        // create a list to store dfs
+        vector<int> ls; 
+        // call dfs for starting node
+        dfs(start, adj, vis, ls); 
+        return ls; 
+    }
+void addEdge(vector <int> adj[], int u, int v) {
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+}
+
+void printAns(vector <int> &ans) {
+    for (int i = 0; i < ans.size(); i++) {
+        cout << ans[i] << " ";
+    }
+}
+
+int main() 
+{
+/*
+    vector <int> adj[5];
+    
+    addEdge(adj, 0, 2);
+    addEdge(adj, 2, 4);
+    addEdge(adj, 0, 1);
+    addEdge(adj, 0, 3);
+
+    vector <int> ans = dfsOfGraph(5, adj);
+    printAns(ans);
+    // 0 2 4 1 3
+*/
+ vector < int > adj[5];
+
+  addEdge(adj, 0, 1);
+  addEdge(adj, 0, 2);
+  addEdge(adj, 0, 3);
+  addEdge(adj, 2, 4);
+
+  
+  vector < int > ans = bfs(5, adj);
+  printAns(ans);
+  cout << endl;
+// 0 1 2 3 4
+    return 0;
 }

@@ -354,6 +354,7 @@ return prev[m-1];
 /*
 Triangle->
 reach from 0,0 index to last row -> right triangle
+Fixed starting point - variable ending point
 1
 2  3
 3  6  7
