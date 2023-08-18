@@ -21,7 +21,7 @@ f(ind,target){
 dp[1001][1001];
 f(ind,target){
     if(target==0) return true;
-    if(ind==0) return (a[0]==target);
+    if(ind==0) return (a[0]==target); 
     if(dp[ind][target]!=-1) return dp[ind][target];
     bool notTake=f(ind-1,target);
     bool take=false;
@@ -37,7 +37,7 @@ dp[n][target+1];
 for(int i=0;i<n;i++){
     dp[i][0]=true;
 }
-dp[0][a[0]]=true;
+dp[0][a[0]]=true; //at index 0 we can only satisfy target which is equal to a[0] or it is 0
 for(int ind = 1; ind<n; ind++){
         for(int target= 1; target<=k; target++){
             
