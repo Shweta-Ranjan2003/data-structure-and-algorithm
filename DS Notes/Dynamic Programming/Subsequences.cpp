@@ -530,6 +530,114 @@ int targetSum(int n, int target, vector<int>& arr){
 }
   
 */
+
+/*
+Rod cutting problem
+N=5
+         1 2 3 4 5
+price[]= 2,5,7,8,10
+
+2,2,2,2,2=10 (5 pieces of 1 length)
+2,5,5 = 15 (1,2,2)
+5,7=12 (2,3)
+
+2,5,7,8,10
+0 1 2 3 4 (index 0 means length 1 and so on)
+
+1) express ind terms of (ind,N)
+2) take , notTake
+3) maximum of all
+  
+f(ind,N){
+   if(ind==0){
+    return N*price[0]; //because index 0 means length 1 and n times we can pick length 1 rod
+   }
+    notTake=0+f(ind-1,N);
+    int take=INT_MIN;
+     int rodLength=ind+1;
+    if(rodLength<=N){
+        take=price[ind]+f(ind,N-rodLength);
+    }
+    return max(take,notTake);
+}
+
+//Memoization
+dp[N][N+1]
+f(ind,N){
+   if(ind==0){
+    return N*price[0]; //because index 0 means length 1 and n times we can pick length 1 rod
+   }
+   if(dp[ind][N]!=-1) return dp[ind][N];
+    notTake=0+f(ind-1,N);
+    int take=INT_MIN;
+    int rodLength=ind+1;
+    if(rodLength<=N){
+        take=price[ind]+f(ind,N-rodLength);
+    }
+    return dp[ind][N]=max(take,notTake);
+}
+
+//Tabulation
+1. base case -> does base case have boundary on N - NO so N can be anything
+2. loop for changing parameters
+3. copy the recurence
+dp[n][n+1]=0;
+for(N=0;N<=n;N++){
+    dp[0][N]=N*price[0];
+}
+for(int ind=1;ind<n;ind++){
+    for(int N=0;N<=n;N++){
+        int notTake=0+dp[ind-1][N];
+        int take=INT_MIN;
+        int rodlength=ind+1;
+        if(rodlength<=N){
+            take=price[ind]+dp[ind][N-rodlength];
+        }
+        dp[ind][N]=max(take,notTake);
+    }
+}
+return dp[n-1][n];
+
+
+//Space optimization
+vector<int>prev(n+1,0);
+vector<int>curr(n+1,0);
+for(N=0;N<=n;N++){
+    prev[N]=N*price[0];
+}
+for(int ind=1;ind<n;ind++){
+    for(int N=0;N<=n;N++){
+        int notTake=0+prev[N];
+        int take=INT_MIN;
+        int rodlength=ind+1;
+        if(rodlength<=N){
+            take=price[ind]+curr[N-rodlength];
+        }
+        curr[N]=max(take,notTake);
+    }
+    prev=curr;
+}
+return prev[n];
+
+
+//1d space optimization
+vector<int>prev(n+1,0);
+for(N=0;N<=n;N++){
+    prev[N]=N*price[0];
+}
+for(int ind=1;ind<n;ind++){
+    for(int N=0;N<=n;N++){
+        int notTake=0+prev[N];
+        int take=INT_MIN;
+        int rodlength=ind+1;
+        if(rodlength<=N){
+            take=price[ind]+prev[N-rodlength];
+        }
+        prev[N]=max(take,notTake);
+    }
+}
+return prev[n];
+*/
 int main()
 { 
  

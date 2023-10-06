@@ -264,6 +264,101 @@ long countWaysToMakeChange(vector<int>& arr, int n, int T){
     return prev[T];
 }
 */
+
+/*
+Unbounded knapsack -> infinite supply
+wt-> {2,4,6}
+val-> {5,11,13}
+
+f(ind , w){
+    if(ind==0){
+         return [(w/wt[0])*val[0]]; //if wt left is 5 and wt of 0th index is 2 then pick item 2 times and val will also be added two time
+    }
+    notTake=0+f(ind-1,w);
+    take=INT_MIN;
+    if(wt[ind]<=w){
+        take=val[ind]+f(ind-1,w-wt[ind]);
+    }
+    return max(take,notTake);
+}
+
+//Memoization
+dp[n][w+1];
+f(ind , w){
+    if(ind==0){
+         return [(w/wt[0])*val[0]]; //if wt left is 5 and wt of 0th index is 2 then pick item 2 times and val will also be added two time
+    }
+    if(dp[ind][w]!=-1) return dp[ind][w];
+    notTake=0+f(ind-1,w);
+    take=INT_MIN;
+    if(wt[ind]<=w){
+        take=val[ind]+f(ind-1,w-wt[ind]);
+    }
+    return dp[ind][w]=max(take,notTake);
+}
+
+//Tabulation (bottom-up) w=maxweight
+1. Base case
+2. write nested loop for changing parameter
+3. copy recursion
+
+vector<vector<int>>dp(n,vector<int>(w+1,0));
+
+for(int W=0;W<=w;W++){
+    dp[0][W]= ((int)(W/wt[0]))*val[0];
+}
+for(int ind=1;ind<n;ind++){
+    for(int W=0;W<=w;W++){
+        int notTake=0+dp[ind-1][W];
+        int take=0;
+        if(wt[ind]<=W){
+            take=val[ind]+dp[ind-1][W-wt[ind]];
+        }
+        dp[ind][W]=max(take,notTake);
+    }
+}
+return dp[n-1][w];
+
+//Space optimization
+vector<int>prev(w+1,0);
+vector<int>curr(w+1,0);
+
+for(int W=0;W<=w;W++){
+    prev[W]=((int)(W/wt[0]))*val[0];
+}
+
+for(int ind=1;ind<n;ind++){
+    for(int W=0;W<w;W++){
+        int notTake=0+prev[W];
+        int take=0;
+        if(wt[ind]<=W){
+            take=val[ind]+curr[W-wt[ind]];
+        }
+        curr[W]=max(notTake,take);
+    }
+    prev=curr;
+}
+return prev[w];
+
+//1d optimization
+vector<int>prev(w+1,0);
+
+for(int W=0;W<=w;W++){
+    prev[W]=((int)(W/wt[0]))*val[0];
+}
+
+for(int ind=1;ind<n;ind++){
+    for(int W=0;W<w;W++){
+        int notTake=0+prev[W];
+        int take=0;
+        if(wt[ind]<=W){
+            take=val[ind]+prev[W-wt[ind]];
+        }
+        prev[W]=max(notTake,take);
+    }
+}
+return prev[w];
+*/
 int main()
 { 
  
