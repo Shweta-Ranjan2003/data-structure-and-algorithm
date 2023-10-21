@@ -129,6 +129,7 @@ vector<int> bfs(int V , vector<int> adj[]){
 DFS - depth first search
        1
     2     3---4
+          |   |
   5   6   7---8
 
   dfs - 1 2 5 6 3 7 8 4
@@ -178,7 +179,7 @@ void dfs(int node, vector<int> adj[], int vis[], vector<int> &ls) {
     }
 void addEdge(vector <int> adj[], int u, int v) {
     adj[u].push_back(v);
-    adj[v].push_back(u);
+    adj[v].push_back(u); //remove this line in case of directed graph
 }
 
 void printAns(vector <int> &ans) {

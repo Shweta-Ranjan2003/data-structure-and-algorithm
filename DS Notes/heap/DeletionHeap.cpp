@@ -27,6 +27,28 @@ void deletion(int arr[] , int size ){
   }
   
 }
+
+void deleteFromHeap(int arr[],int size){
+   if(size==0){
+      return;
+   }
+   arr[1]=arr[size];
+   size--;
+   int i=1;
+   while(i<size){
+      int left=2*i;
+      int right=2*i+1;
+      if(left<size && arr[i]<arr[left]){
+         swap(arr[i],arr[left]);
+         i=left;
+      }
+      else if(right<size && arr[i]<arr[right]){
+         swap(arr[i],arr[right]);
+         i=right;
+      }
+      else return;
+   }
+}
 int main()
 { 
  int size;
