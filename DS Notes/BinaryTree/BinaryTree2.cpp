@@ -96,7 +96,8 @@ Node* Find(Node* root , int data){
     }
 Node* FindMin(Node* root){
     if(root==NULL) return NULL;
-    while(root->left!=NULL) root = root->left; return root;
+    while(root->left!=NULL) root = root->left; 
+    return root;
 }
 Node* GetSuccessor(Node * root , int data){
     //Search the node - O(h)

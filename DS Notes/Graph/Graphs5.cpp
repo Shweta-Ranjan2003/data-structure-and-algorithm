@@ -182,7 +182,7 @@ int wordLadderLength(string startWord, string targetWord,vector<string> &wordLis
 Word ladder 2
 Same but you have to return the list of transformation sequence and all the sequences of smallest length
 starting word = bat , ending word = coz
-word list - {pat,bat,pot,poz,coz}
+word list - {pat,bat,pot,poz,coz,bot}
 
 {bat}
 

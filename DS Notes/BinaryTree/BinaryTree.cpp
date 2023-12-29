@@ -10,6 +10,7 @@ Depth and height = Depth of x=length of path from root to x OR no. of edges in p
 Height of x=  No. of edges in longest path from x to a leaf.
 Height of tree = height of root node
 */
+
 /*
 Binary Tree -> A tree in which each node can have at most 2 children.
 strict/proper binary tree -> each node can have either 2 or 0 children

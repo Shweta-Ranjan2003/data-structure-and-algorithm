@@ -230,8 +230,8 @@ dest=2,2
 
 pq(min heap)because we want min effort
 if we got dest distance as a top of pq we will take it as answer because rest will be equal or more then that
-and we will not consider dest as answer till the time its become the top of pq because there might be some other
-path which will take less effort
+and we will not consider dest as answer till the time its become the top of pq because our pq is mean heap it stores 
+minimum of all encountered yet and there might be some other path which will take less effort 
 
 
 int MinimumEffort(vector<vector<int>> &heights)
@@ -404,7 +404,10 @@ arr[]={2,5,7}
 /*
 Number of ways to arrive at destination
 when we reach a node with same distance as before then ways will be +1 to before
-
+a b 
+    c  f
+d r 
+Here, for reaching f there are two paths as c is reached by two ways
 
 int countPaths(int n, vector<vector<int>> &roads)
     {
