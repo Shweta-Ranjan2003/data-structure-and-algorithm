@@ -14,7 +14,7 @@ queue - 1 2 3 6 4 5
 color - 0 1 0 1 1 0 -1 -1
 node = 4 has a color 1 but adjacent 5 has same color so its not bipartite
 
-//-------BFS--------
+//--------BFS--------
  bool check(int start, int V, vector<int>adj[], int color[]) {
         queue<int> q;
 	    q.push(start); 
@@ -143,7 +143,9 @@ any node who is a part of a cycle are not safe
 any one leads to a cycle is not safe
 
 
-bool dfsCheck(int node, vector<int> adj[], int vis[],int pathVis[], int check[]) {
+bool dfsCheck(int node, vector<int> adj[], int vis[],
+ int pathVis[], 
+        int check[]) {
 		vis[node] = 1;
 		pathVis[node] = 1;
 		check[node] = 0;
@@ -168,9 +170,9 @@ bool dfsCheck(int node, vector<int> adj[], int vis[],int pathVis[], int check[])
 		pathVis[node] = 0;
 		return false;
 	}
-
-	vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
-		int vis[V] = {0};
+    vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
+        // code here
+        int vis[V] = {0};
 		int pathVis[V] = {0};
 		int check[V] = {0};
 		vector<int> safeNodes;
@@ -183,7 +185,7 @@ bool dfsCheck(int node, vector<int> adj[], int vis[],int pathVis[], int check[])
 			if (check[i] == 1) safeNodes.push_back(i);
 		}
 		return safeNodes;
-	}
+    }
 */
 int main()
 { 

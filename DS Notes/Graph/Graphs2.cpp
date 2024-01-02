@@ -113,7 +113,7 @@ int initial=img[sr][sc];
 vector<vector<int>>ans=img;
 int delRow[]={-1,0,+1,0};
 int delCol[]={0,+1,0,-1};
-dfs(sr,sc,ans,img,newColor,delRow,delCol);
+dfs(sr,sc,ans,img,newColor,delRow,delCol,initial);
 }
 */
 
@@ -246,7 +246,7 @@ return false;
 */
 
 /*
-Detect cycle in undirectec graph using dfs
+Detect cycle in undirected graph using dfs
   2  5
 1      7
   3  6
@@ -329,7 +329,7 @@ vector<vector<int>>nearest(vector<vector<int>>grid)
 	        int col = q.front().first.second; 
 	        int steps = q.front().second; 
 	        q.pop(); 
-	        dist[row][col] = steps; 
+	        dist[row][col] = steps; (not min of dist[row][col],steps because once we store steps in it before we would have mark it vis and we will never send it back to queue with same or higher no. of steps)
 	        // for all 4 neighbours
 	        for(int i = 0;i<4;i++) {
 	            int nrow = row + delrow[i]; 
@@ -377,7 +377,7 @@ void dfs(){
 int main(){
 vector<vector<int>>vis(n,vector<int>(m,0));
 int delrow[]={-1,0,1,0};
-int delcol[]={0,1,0,-1}
+int delcol[]={0,1,0,-1};
 for(int j=0;j<m;j++){
   if(!vis[0][j] and mat[0][j]=='O'){
     dfs(0,j,vis,mat,delrow,delcol);
@@ -386,7 +386,7 @@ for(int j=0;j<m;j++){
     dfs(n-1,j,vis,mat,delrow,delcol);
   }
 }
-for(int i=0;i<m;i++){
+for(int i=0;i<n;i++){
   if(!vis[i][0] and mat[i][0]=='O'){
     dfs(i,0,vis,mat,delrow,delcol);
   }
@@ -409,6 +409,11 @@ return mat;
 /*
 Same boundary question can be solved with bfs lets see how
 Number of enclaves
+You are given an m x n binary matrix grid, where 0 represents a sea cell and 1 represents a land cell.
+
+A move consists of walking from one land cell to another adjacent (4-directionally) land cell or walking off the boundary of the grid.
+
+Return the number of land cells in grid for which we cannot walk off the boundary of the grid in any number of moves.
 int numberOfEnclaves(vector<vector<int>> &grid) {
         queue<pair<int,int>> q; 
         int n = grid.size(); 
