@@ -1,13 +1,16 @@
 #include <iostream>
 using namespace std;
 /*
-Shortest path in undirected graph with unit weights
+Shortest Path in Directed Acyclic Graph Topological Sort
 in adj matrix we will store pair (node,weight);
 
 Step 1- Do a topo sort on the graph
 Step 2- Take the node out of stack and relax the edge
 
 maintain a distance vector of infinity then relax it by taking edges one by one
+Because if we do toposort then top of the stack will contain the node that has no incoming edge just outgoing edge we will conside it
+as starting point and so if we start relaxing edges by starting from that edge and the distance from that edge and then 
+comparing further we will obtain shortest path array
 
 void topoSort(int node, vector < pair < int, int >> adj[],int vis[], stack < int > & st) { 
       vis[node] = 1;
@@ -72,7 +75,7 @@ vector < int > shortestPath(int N, int M, vector < vector < int >> & edges) {
 */
 
 /*
-Shortest path in undirected graph with unit weights -BFS
+Shortest path in Undirected Graph having unit distance -BFS
 all the edges have unit dist - why queue because here all the nodes will be sorted
 like first node with weight 1 then of 2 and so on , so they are already stored in sorted manner
 

@@ -63,6 +63,7 @@ return dist;
 Print shortest path in weighted graph
 
 Maintain a parent array which tells you that who is your shortest distance parent
+like if your end node is 5 then from parent node you will determine from which node you came to 5 and so on
 
 vector<pair<int, int>> adj[n + 1];
         for (auto it : edges)
@@ -308,7 +309,12 @@ int MinimumEffort(vector<vector<int>> &heights)
 /*
 Cheapest flights within k stops
 {stop,node,dist}
-no need of pq because increase is constant so use queue
+why not {dist,node,stop}?
+Because lets say we reach the end with higher than k stops then what the point of not considering it?
+we cannot go back and undo the distance array , so its important to traverse taking stop as a first factor
+so we can reach destination with cheapest ticket and within the limit of k stops.
+
+no need of pq because stops increase is constant so use queue (video from 10th min)
 
 
  int CheapestFLight(int n, vector<vector<int>> &flights,
