@@ -1,5 +1,4 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 void merge(vector<int> &arr, int low, int mid, int high) {
@@ -49,8 +48,8 @@ void mergeSort(vector<int> &arr, int low, int high) {
 
 int main() {
 
-    vector<int> arr = {3,1,2,4,1,5,2,6,4}  ;
-    int n = 9;
+    vector<int> arr = {9, 4, 7, 6, 3, 1, 5}  ;
+    int n = 7;
 
     cout << "Before Sorting Array: " << endl;
     for (int i = 0; i < n; i++) {
