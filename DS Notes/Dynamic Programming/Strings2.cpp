@@ -98,8 +98,8 @@ f(i,j){
 //s1 get exhausted and s2 left then x insertion operation where x=no. of elements left in s2
 //s1 is left but s2 exhausted then x deletion operation from 0th index to ith index in s1
 
-if(i<0) return j+1;
-if(j<0) return i+1;
+if(i<0) return j+1; //insertion
+if(j<0) return i+1; //deletion
 
 if(s1[i]==s2[j]){
     return 0+f(i-1,j-1);
@@ -205,7 +205,7 @@ if(j<0 and i>=0){
     if(s1[i]==s2[j] || s1[i]=='?'){
         return f(i-1,j-1);
     }
-    if(s1[i]=='x'){
+    if(s1[i]=='*'){
         return f(i-1,j) or f(i,j-1); //if star means nothing and if it does
     }
     return false;

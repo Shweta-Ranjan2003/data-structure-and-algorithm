@@ -17,38 +17,48 @@ The idea is, not to do complete quicksort, but stop at the point where pivot
 itself is k’th smallest element. Also, not to recur for both left and right 
 sides of pivot, but recur for one of them according to the position of pivot. 
 */
-int partition(vector<int>&arr,int s,int e){
-    int pivot=arr[e];
-    int i=s-1;
-    for(int j=s;j<e;j++){
-        if(arr[j]<=pivot){
-            i++;
-            swap(arr[i],arr[j]);
+class Solution {
+public:
+    
+    int partition_algo(vector<int>& nums, int L, int R) {
+        int P = nums[L];
+        int i = L+1; //0
+        int j = R; //0
+        while(i <= j) {   
+            if(nums[i] < P && nums[j] > P) {
+                swap(nums[i], nums[j]);
+                i++;
+                j--;
+            }
+            if(nums[i] >= P) {
+                i++;
+            }
+            if(nums[j] <= P) {
+                j--;
+            }
         }
+        swap(nums[L], nums[j]);
+        return j; //P is at jth index
     }
-    swap(arr[e],arr[i+1]);
-    return i+1;
-}
-int kthSmallest(vector<int>&arr, int l, int r, int K)
-{
-    if (K > 0 && K <= r - l + 1) {
-        int pos = partition(arr, l, r);
-        if (pos - l == K - 1) return arr[pos];
-        if (pos - l > K - 1)  return kthSmallest(arr, l, pos - 1, K);
-        return kthSmallest(arr, pos + 1, r, K - (pos + l) - 1);
-    }
- return INT_MAX;
-}
-int qs(vector<int>&arr,int l , int r,int k){
-    if(l<=r){
-        int pivot=partition(arr,l,r);
-        if(pivot==k-1) return arr[pivot];
-        else if(pivot<k-1){
-            return qs(arr,pivot+1,r,k);
+    int findKthLargest(vector<int>& nums, int k) {
+        int n = nums.size();
+        int L = 0;
+        int R = n-1;
+        int pivot_idx = 0;
+        //kth largest pivot element - nums[k-1] (descendinforder me partition karenge)
+        while(true) {
+             pivot_idx = partition_algo(nums, L, R);
+            if(pivot_idx == k-1) {
+                break;
+            } else if(pivot_idx > k-1) { //2nd larget , 4th larget
+                R = pivot_idx - 1;
+            } else {
+                L = pivot_idx + 1;
+            }
         }
-        return qs(arr,l,pivot-1,k);
+        return nums[pivot_idx];
     }
-}
+};
 int main()
 { 
  vector<int>arr{7,2,0,4,8,9,5,9,10}; //worst case
