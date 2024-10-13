@@ -5,6 +5,7 @@
         "queue": "cpp",
         "stack": "cpp",
         "vector": "cpp",
-        "unordered_set": "cpp"
+        "unordered_set": "cpp",
+        "unordered_map": "cpp"
     }
 }
